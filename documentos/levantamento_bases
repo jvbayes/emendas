@@ -1,0 +1,72 @@
+# Levantamento de bases — Emendas Parlamentares
+
+## Portal da Transparência
+
+Fonte:https://portaldatransparencia.gov.br/emendas e também:
+https://portaldatransparencia.gov.br/dicionario-de-dados-emendas-parlamentares
+
+### Por Emenda Parlamentar
+
+Variáveis encontradas:
+- Ano da emenda
+- Tipo de emenda
+- Autor
+- Número da emenda
+- Código da emenda
+- Localidade do gasto
+- Função
+- Subfunção
+- Programa
+- Ação
+- Plano Orçamentário
+- Valor empenhado
+- Valor liquidado
+- Valor pago
+- Restos a pagar
+
+O Portal possui dados de emendas identificáveis a partir de 2014. O código da emenda pode ser usado para identificar a emenda.
+
+### Por Favorecido
+
+Permite consultar os favorecidos e os valores recebidos.
+Variáveis/filtros encontrados:
+- Período
+- Favorecido
+- Natureza jurídica
+- Tipo de emenda
+- UF
+- Município
+- Código da emenda
+- Autor
+- Valor recebido
+
+### Por Documento
+
+Permite observar a execução da despesa em nível mais detalhado.
+Entre as informações disponíveis:
+- Código da emenda
+- Autor
+- Ano
+- Tipo
+- Favorecido
+- UF
+- Município
+- Localidade de aplicação
+- Função
+- Subfunção
+- Programa
+- Ação
+- Natureza da despesa
+- Valor do documento
+- Convênio
+- Fase da despesa
+
+As fases observadas são principalmente empenho, liquidação e pagamento.
+
+### Observação
+
+Uma mesma emenda pode aparecer relacionada a mais de um município. Portanto, ainda não está definido qual será a unidade de observação da pesquisa.
+Exemplo analisado:
+Emenda 202638970001 — 2026 — Acácio Favacho.
+
+A emenda aparece relacionada a Calçoene, Tartarugalzinho e Porto Grande.
