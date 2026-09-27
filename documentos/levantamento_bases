@@ -63,10 +63,107 @@ Entre as informações disponíveis:
 
 As fases observadas são principalmente empenho, liquidação e pagamento.
 
-### Observação
-
+## Observação
 Uma mesma emenda pode aparecer relacionada a mais de um município. Portanto, ainda não está definido qual será a unidade de observação da pesquisa.
-Exemplo analisado:
-Emenda 202638970001 — 2026 — Acácio Favacho.
-
+Exemplo analisado: Emenda 202638970001 — 2026 — Acácio Favacho.
 A emenda aparece relacionada a Calçoene, Tartarugalzinho e Porto Grande.
+
+## SIOP — Sistema Integrado de Planejamento e Orçamento
+
+Fonte:
+- Dados Abertos do Orçamento: https://orcamento.dados.gov.br/siopdoc/doku.php/acesso_publico:dados_abertos
+- Dados Abertos de Emendas Parlamentares: https://orcamento.dados.gov.br/siopdoc/doku.php/acesso_publico:emendas_parlamentares_dados_abertos
+- Editor SPARQL: https://www1.siop.planejamento.gov.br/sparql/
+
+### Período
+
+A documentação disponibiliza dados orçamentários de diferentes exercícios, incluindo LOAs de 2001 a 2026.
+
+As emendas individuais, classificadas como RP 6, estão disponíveis a partir de 2014. As emendas de bancada, classificadas como RP 7, estão disponíveis a partir de 2017.
+
+Foi realizada uma consulta exploratória ao exercício de 2015.
+
+### Unidade de observação
+
+Item de despesa orçamentária.
+
+A consulta retornou registros individuais de itens de despesa, que não devem ser confundidos com emendas parlamentares. Uma emenda pode estar relacionada a mais de um item orçamentário.
+
+### Identificador
+
+Cada item possui um identificador próprio, apresentado como URI.
+
+Exemplo:
+http://orcamento.dados.gov.br/id/2015/ItemDespesa/100003`
+
+Esse identificador corresponde ao item de despesa, não ao código individual da emenda.
+
+### Variáveis principais
+
+- Exercício orçamentário
+- Data de atualização do registro
+- Esfera orçamentária
+- Órgão
+- Unidade orçamentária
+- Função
+- Subfunção
+- Programa
+- Ação orçamentária
+- Subtítulo ou localizador
+- Plano orçamentário
+- Fonte de recursos
+- Categoria econômica
+- Grupo de natureza da despesa (GND)
+- Modalidade de aplicação
+- Identificador de uso
+- Resultado primário (RP)
+- Elemento de despesa
+- Valor do Projeto de Lei Orçamentária (PLOA)
+- Dotação inicial da LOA
+- Valor da lei mais créditos
+- Valor empenhado
+- Valor liquidado
+- Valor pago
+
+### Teste realizado
+
+Foi utilizado o editor SPARQL para consultar os dados orçamentários de 2015.
+
+Resultados obtidos:
+
+- Total de itens de despesa no grafo de 2015: 402.756
+- Itens classificados como RP 6: 23.991
+
+A consulta de RP 6 retornou informações sobre a classificação orçamentária e a execução financeira dos itens. Entre os registros encontrados, havia despesas associadas a diferentes órgãos, programas, ações e localidades, inclusive registros referentes ao Piauí.
+
+Esses números representam itens orçamentários, não a quantidade de emendas parlamentares.
+
+### O que acrescenta ao Portal
+
+O SIOP complementa as informações do Portal da Transparência com maior detalhamento da estrutura orçamentária.
+
+Permite examinar a distribuição dos recursos por órgão, unidade orçamentária, função, subfunção, programa, ação, fonte de recursos, modalidade de aplicação e natureza da despesa.
+
+Também disponibiliza valores de diferentes etapas do orçamento, possibilitando distinguir os valores previstos dos valores empenhados, liquidados e pagos.
+
+### Possibilidade de cruzamento
+
+O cruzamento com o Portal da Transparência é uma possibilidade a ser investigada.
+
+O Portal apresenta códigos de emendas, autoria e informações de execução. A consulta exploratória realizada no SIOP retornou identificadores próprios dos itens de despesa, mas não apresentou diretamente o código individual da emenda nem o nome do parlamentar.
+
+A documentação do SIOP informa que, desde 2015, o número da emenda passou a constar no PTRES, permitindo maior detalhamento das emendas RP 6 e RP 7 no SIAFI. Será necessário verificar se esse campo está disponível em outra consulta ou base e se permite relacionar os registros ao Portal da Transparência.
+
+Também é possível comparar informações por exercício, ação orçamentária, classificação funcional e localizador, embora essas correspondências não garantam uma ligação única entre os registros.
+
+### Observações
+
+- Os dados são disponibilizados em formato RDF e podem ser consultados por meio da linguagem SPARQL.
+- A consulta realizada identificou itens orçamentários classificados como RP 6, mas não extraiu diretamente o código da emenda ou seu autor.
+- O identificador do item de despesa não deve ser tratado como identificador da emenda.
+- A unidade de observação da extração é o item orçamentário, e não a emenda ou o município.
+- Os valores empenhados, liquidados e pagos representam etapas distintas da execução orçamentária.
+- A relação entre os itens do SIOP e as emendas do Portal da Transparência ainda precisa ser verificada.
+- A documentação oficial indica que as informações de emendas individuais RP 6 estão disponíveis a partir de 2014 e as de bancada RP 7 a partir de 2017.
+
+**Situação:** fonte consultada; acesso ao SPARQL testado; extração exploratória de 2015 realizada. O cruzamento com o Portal da Transparência permanece pendente.
