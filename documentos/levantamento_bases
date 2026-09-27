@@ -70,100 +70,303 @@ A emenda aparece relacionada a Calçoene, Tartarugalzinho e Porto Grande.
 
 ## SIOP — Sistema Integrado de Planejamento e Orçamento
 
-Fonte:
+### Fontes
+
 - Dados Abertos do Orçamento: https://orcamento.dados.gov.br/siopdoc/doku.php/acesso_publico:dados_abertos
 - Dados Abertos de Emendas Parlamentares: https://orcamento.dados.gov.br/siopdoc/doku.php/acesso_publico:emendas_parlamentares_dados_abertos
+- Painel de Emendas Individuais: https://orcamento.dados.gov.br/siopdoc/doku.php/acesso_publico:emendas_individuais
 - Editor SPARQL: https://www1.siop.planejamento.gov.br/sparql/
+
+### Descrição da base
+
+O Sistema Integrado de Planejamento e Orçamento (SIOP) disponibiliza informações sobre o orçamento federal, incluindo dados de elaboração e execução orçamentária e informações relacionadas às emendas parlamentares.
+
+Os dados abertos do orçamento são disponibilizados em formato RDF e podem ser consultados por meio da linguagem SPARQL. O sistema também possui painéis que permitem visualizar informações agregadas sobre as emendas parlamentares, com filtros por exercício, resultado primário, órgão, autor e outras classificações.
 
 ### Período
 
-A documentação disponibiliza dados orçamentários de diferentes exercícios, incluindo LOAs de 2001 a 2026.
+A documentação disponibiliza dados orçamentários de diferentes exercícios, incluindo as Leis Orçamentárias Anuais (LOAs) de 2001 a 2026.
 
-As emendas individuais, classificadas como RP 6, estão disponíveis a partir de 2014. As emendas de bancada, classificadas como RP 7, estão disponíveis a partir de 2017.
+As emendas individuais, classificadas como Resultado Primário 6 (RP 6), estão disponíveis a partir de 2014. As emendas de bancada estadual, classificadas como RP 7, estão disponíveis a partir de 2017.
 
-Foi realizada uma consulta exploratória ao exercício de 2015.
+Neste levantamento, foram realizadas consultas exploratórias referentes ao exercício de 2015.
 
 ### Unidade de observação
 
-Item de despesa orçamentária.
+A consulta SPARQL realizada utiliza como unidade de observação o item de despesa orçamentária.
 
-A consulta retornou registros individuais de itens de despesa, que não devem ser confundidos com emendas parlamentares. Uma emenda pode estar relacionada a mais de um item orçamentário.
+O painel de emendas individuais permite visualizar informações agregadas por diferentes dimensões, como tipo de autor, região, unidade da Federação e partido.
 
-### Identificador
+Essas unidades não devem ser confundidas: um item de despesa não corresponde necessariamente a uma emenda individual, e os resultados agregados do painel não representam registros individualizados de cada emenda.
 
-Cada item possui um identificador próprio, apresentado como URI.
+### Identificadores
+
+Na consulta SPARQL, cada item de despesa possui um identificador próprio, apresentado como URI.
 
 Exemplo:
-http://orcamento.dados.gov.br/id/2015/ItemDespesa/100003`
 
-Esse identificador corresponde ao item de despesa, não ao código individual da emenda.
+`http://orcamento.dados.gov.br/id/2015/ItemDespesa/100003`
+
+Esse identificador corresponde ao item de despesa, não ao código individual da emenda parlamentar.
+
+O código individual da emenda e o número da emenda são informações distintas que ainda precisam ser relacionados aos registros extraídos do SIOP.
 
 ### Variáveis principais
 
-- Exercício orçamentário
-- Data de atualização do registro
-- Esfera orçamentária
-- Órgão
-- Unidade orçamentária
-- Função
-- Subfunção
-- Programa
-- Ação orçamentária
-- Subtítulo ou localizador
-- Plano orçamentário
-- Fonte de recursos
-- Categoria econômica
-- Grupo de natureza da despesa (GND)
-- Modalidade de aplicação
-- Identificador de uso
-- Resultado primário (RP)
-- Elemento de despesa
-- Valor do Projeto de Lei Orçamentária (PLOA)
-- Dotação inicial da LOA
-- Valor da lei mais créditos
-- Valor empenhado
-- Valor liquidado
-- Valor pago
+- Exercício orçamentário;
+- Data de atualização do registro;
+- Esfera orçamentária;
+- Código e descrição do órgão;
+- Código e descrição da unidade orçamentária;
+- Código e descrição da função;
+- Código e descrição da subfunção;
+- Código e descrição do programa;
+- Código e descrição da ação orçamentária;
+- Código e descrição do subtítulo ou localizador;
+- Código e descrição do plano orçamentário;
+- Código e descrição da fonte de recursos;
+- Código e descrição da categoria econômica;
+- Código e descrição do grupo de natureza da despesa (GND);
+- Código e descrição da modalidade de aplicação;
+- Código e descrição do identificador de uso;
+- Código e descrição do resultado primário (RP);
+- Código e descrição do elemento de despesa;
+- Valor do Projeto de Lei Orçamentária (PLOA);
+- Dotação inicial da LOA;
+- Valor da lei mais créditos;
+- Valor empenhado;
+- Valor liquidado;
+- Valor pago.
 
-### Teste realizado
+### Consulta exploratória via SPARQL
 
-Foi utilizado o editor SPARQL para consultar os dados orçamentários de 2015.
+Foi utilizado o editor SPARQL do SIOP para consultar o grafo orçamentário referente ao exercício de 2015.
 
-Resultados obtidos:
+Inicialmente, foi realizada uma consulta geral para verificar a disponibilidade dos dados. Em seguida, foram executadas consultas para identificar a quantidade de itens de despesa e sua distribuição por código de resultado primário.
 
-- Total de itens de despesa no grafo de 2015: 402.756
-- Itens classificados como RP 6: 23.991
+Os resultados obtidos foram:
 
-A consulta de RP 6 retornou informações sobre a classificação orçamentária e a execução financeira dos itens. Entre os registros encontrados, havia despesas associadas a diferentes órgãos, programas, ações e localidades, inclusive registros referentes ao Piauí.
+| Indicador | Quantidade |
+|---|---:|
+| Total de itens de despesa no grafo de 2015 | 402.756 |
+| Itens classificados como RP 0 | 3.596 |
+| Itens classificados como RP 1 | 60.239 |
+| Itens classificados como RP 2 | 307.061 |
+| Itens classificados como RP 3 | 7.869 |
+| Itens classificados como RP 6 | 23.991 |
 
-Esses números representam itens orçamentários, não a quantidade de emendas parlamentares.
+Os 23.991 registros classificados como RP 6 correspondem a itens orçamentários identificados pela consulta, e não ao número de emendas parlamentares individuais.
 
-### O que acrescenta ao Portal
+Posteriormente, foi realizada uma extração dos itens classificados como RP 6, incluindo informações sobre classificação orçamentária e execução financeira.
 
-O SIOP complementa as informações do Portal da Transparência com maior detalhamento da estrutura orçamentária.
+Entre os registros encontrados, foram observadas despesas de diferentes órgãos, programas e ações, com localizadores referentes a estados e municípios, inclusive ao Piauí.
 
-Permite examinar a distribuição dos recursos por órgão, unidade orçamentária, função, subfunção, programa, ação, fonte de recursos, modalidade de aplicação e natureza da despesa.
+### Arquivo extraído
 
-Também disponibiliza valores de diferentes etapas do orçamento, possibilitando distinguir os valores previstos dos valores empenhados, liquidados e pagos.
+O resultado da consulta SPARQL foi exportado em formato CSV e salvo no repositório do projeto.
+
+Arquivo:
+
+`dados/brutos/siop_rp6_2015.csv`
+
+O arquivo contém os registros extraídos da consulta de 2015, com identificadores dos itens de despesa, classificações orçamentárias e valores do orçamento e da execução.
+
+O arquivo foi armazenado na pasta `dados/brutos`, preservando os dados originais para utilização posterior nas etapas de organização, tratamento e análise.
+
+### Consulta ao painel de emendas individuais — 2015
+
+Além da consulta SPARQL, foi explorado o painel de emendas individuais do SIOP, utilizando os seguintes filtros:
+
+- Ano: 2015;
+- Resultado Primário: RP 6 — Emendas Individuais.
+
+O painel apresentou um valor total de R$ 9.663.342.341,00 para os filtros selecionados.
+
+#### Distribuição por tipo de autor
+
+| Tipo de autor | Valor |
+|---|---:|
+| Deputado Federal | R$ 8.357.374.941,00 |
+| Senador | R$ 1.305.967.400,00 |
+| Total | R$ 9.663.342.341,00 |
+
+#### Distribuição por região
+
+| Região | Valor |
+|---|---:|
+| Sudeste | R$ 3.117.258.542,00 |
+| Nordeste | R$ 2.905.736.200,00 |
+| Norte | R$ 1.403.915.300,00 |
+| Sul | R$ 1.371.241.100,00 |
+| Centro-Oeste | R$ 865.191.199,00 |
+| Total | R$ 9.663.342.341,00 |
+
+#### Distribuição por unidade da Federação
+
+| UF | Valor |
+|---|---:|
+| SP | R$ 1.191.364.400,00 |
+| MG | R$ 914.171.342,00 |
+| RJ | R$ 799.503.000,00 |
+| BA | R$ 685.632.600,00 |
+| RS | R$ 538.691.700,00 |
+| PR | R$ 522.382.000,00 |
+| PE | R$ 457.060.000,00 |
+| CE | R$ 408.102.700,00 |
+| MA | R$ 342.816.300,00 |
+| GO | R$ 326.492.000,00 |
+| PA | R$ 326.492.000,00 |
+| SC | R$ 310.167.400,00 |
+| PB | R$ 244.868.400,00 |
+| ES | R$ 212.219.800,00 |
+| PI | R$ 212.219.800,00 |
+| AL | R$ 195.895.200,00 |
+| SE | R$ 179.570.600,00 |
+| RN | R$ 179.570.600,00 |
+| AM | R$ 179.570.600,00 |
+| RR | R$ 179.570.600,00 |
+| AC | R$ 179.570.600,00 |
+| RO | R$ 179.570.600,00 |
+| AP | R$ 179.570.600,00 |
+| MS | R$ 179.570.600,00 |
+| DF | R$ 179.570.599,00 |
+| TO | R$ 179.570.300,00 |
+| MT | R$ 179.558.000,00 |
+| Total | R$ 9.663.342.341,00 |
+
+O painel apresentou R$ 212.219.800,00 para o Piauí no exercício de 2015.
+
+#### Distribuição por partido
+
+Foi realizada uma consulta com filtro por partido, identificando o seguinte resultado para o DEM:
+
+| Partido | Valor |
+|---|---:|
+| DEM | R$ 522.373.400,00 |
+
+#### Detalhamento do DEM por tipo de autor
+
+Com a aplicação de um filtro adicional por tipo de autor, foi obtido o seguinte resultado:
+
+| Tipo de autor | Partido | Valor |
+|---|---|---:|
+| Deputado Federal | DEM | R$ 457.075.000,00 |
+| Senadores | DEM | R$ 65.298.400,00 |
+| Total | DEM | R$ 522.373.400,00 |
+
+O valor atribuído aos senadores corresponde à diferença entre o total apresentado para o partido e o valor identificado para os deputados federais.
+
+Esse detalhamento demonstra a possibilidade de explorar a distribuição agregada dos valores por partido e tipo de autor.
+
+### O que acrescenta ao Portal da Transparência
+
+O SIOP complementa as informações disponíveis no Portal da Transparência com dados da estrutura e da classificação orçamentária.
+
+Enquanto o Portal permite consultar emendas, autores, códigos, favorecidos, documentos e valores de execução, o SIOP acrescenta informações sobre:
+
+- Esfera e órgão orçamentário;
+- Unidade orçamentária;
+- Função e subfunção;
+- Programa e ação;
+- Plano orçamentário;
+- Fonte de recursos;
+- Categoria econômica;
+- Grupo de natureza da despesa;
+- Modalidade de aplicação;
+- Resultado primário;
+- Elemento de despesa;
+- Valores do orçamento e da execução financeira.
+
+O painel também permite observar distribuições agregadas por tipo de autor, região, UF e partido.
+
+Essas informações podem contribuir para a análise da composição orçamentária e da distribuição territorial das emendas parlamentares.
 
 ### Possibilidade de cruzamento
 
-O cruzamento com o Portal da Transparência é uma possibilidade a ser investigada.
+O cruzamento entre o SIOP e o Portal da Transparência constitui uma possibilidade relevante para o desenvolvimento da pesquisa.
 
-O Portal apresenta códigos de emendas, autoria e informações de execução. A consulta exploratória realizada no SIOP retornou identificadores próprios dos itens de despesa, mas não apresentou diretamente o código individual da emenda nem o nome do parlamentar.
+O Portal apresenta códigos de emenda, autoria e informações de execução. A extração exploratória do SIOP, por sua vez, retornou identificadores próprios dos itens de despesa, além de classificações orçamentárias, localizadores e valores.
 
-A documentação do SIOP informa que, desde 2015, o número da emenda passou a constar no PTRES, permitindo maior detalhamento das emendas RP 6 e RP 7 no SIAFI. Será necessário verificar se esse campo está disponível em outra consulta ou base e se permite relacionar os registros ao Portal da Transparência.
+Entretanto, o CSV extraído não apresentou diretamente o código individual da emenda nem o nome do parlamentar.
 
-Também é possível comparar informações por exercício, ação orçamentária, classificação funcional e localizador, embora essas correspondências não garantam uma ligação única entre os registros.
+A documentação do SIOP informa que, desde 2015, o número da emenda passou a constar no PTRES, permitindo maior detalhamento das emendas RP 6 e RP 7 no SIAFI.
 
-### Observações
+Será necessário verificar se esse campo está disponível em outra consulta ou base e se pode ser utilizado para relacionar os registros do SIOP aos códigos do Portal da Transparência.
 
-- Os dados são disponibilizados em formato RDF e podem ser consultados por meio da linguagem SPARQL.
-- A consulta realizada identificou itens orçamentários classificados como RP 6, mas não extraiu diretamente o código da emenda ou seu autor.
-- O identificador do item de despesa não deve ser tratado como identificador da emenda.
-- A unidade de observação da extração é o item orçamentário, e não a emenda ou o município.
+Também poderão ser investigadas correspondências entre os registros por meio de:
+
+- Exercício orçamentário;
+- Código e descrição da ação;
+- Função e subfunção;
+- Órgão e unidade orçamentária;
+- Subtítulo ou localizador;
+- Classificação da despesa;
+- Valores orçamentários e de execução.
+
+Essas correspondências podem auxiliar na comparação das bases, mas não garantem, isoladamente, uma ligação única entre uma emenda e um item de despesa.
+
+A relação entre os registros deverá ser testada antes da construção de uma base integrada.
+
+### Utilidade para a pesquisa
+
+O SIOP apresenta potencial para diferentes linhas de investigação relacionadas às emendas parlamentares, especialmente:
+
+- Distribuição orçamentária das emendas por área de governo;
+- Distribuição territorial dos recursos;
+- Composição por órgão, programa e ação orçamentária;
+- Comparação entre valores previstos e valores executados;
+- Distribuição agregada por tipo de autor e partido;
+- Comparação entre modalidades de emendas, conforme a disponibilidade dos dados;
+- Investigação da relação entre emendas, execução orçamentária e características socioeconômicas das localidades.
+
+A análise poderá ser complementada por indicadores do IBGE, dados fiscais do Siconfi e informações eleitorais do TSE, desde que sejam identificadas chaves de integração adequadas.
+
+### Limitações e observações metodológicas
+
+- Os dados abertos do orçamento são disponibilizados em formato RDF e exigem consultas SPARQL para determinadas extrações.
+- A unidade de observação da extração realizada é o item de despesa, não a emenda parlamentar.
+- Os 23.991 registros RP 6 identificados na consulta de 2015 representam itens orçamentários, e não emendas individuais distintas.
+- O identificador URI do item de despesa não deve ser tratado como código da emenda.
+- Uma mesma emenda pode estar associada a mais de um item orçamentário, documento, favorecido ou localidade.
+- O painel apresenta resultados agregados, que não permitem identificar individualmente todas as emendas e seus respectivos documentos de execução.
+- O indicador financeiro apresentado pelo painel precisa ser confirmado antes de comparações com valores de outras bases.
 - Os valores empenhados, liquidados e pagos representam etapas distintas da execução orçamentária.
-- A relação entre os itens do SIOP e as emendas do Portal da Transparência ainda precisa ser verificada.
-- A documentação oficial indica que as informações de emendas individuais RP 6 estão disponíveis a partir de 2014 e as de bancada RP 7 a partir de 2017.
+- A distribuição por UF e região não deve ser interpretada automaticamente como distribuição por município beneficiário.
+- O cruzamento entre os registros do SIOP e do Portal da Transparência ainda não foi validado.
+- Mudanças nas regras orçamentárias e nas classificações das emendas ao longo do tempo devem ser consideradas em estudos históricos.
 
-**Situação:** fonte consultada; acesso ao SPARQL testado; extração exploratória de 2015 realizada. O cruzamento com o Portal da Transparência permanece pendente.
+### Situação do levantamento
+
+Fonte consultada: sim.
+
+Acesso ao SPARQL: testado.
+
+Consulta geral ao exercício de 2015: realizada.
+
+Identificação de itens RP 6: realizada, com 23.991 registros identificados.
+
+Extração de dados: realizada e salva em `dados/brutos/siop_rp6_2015.csv`.
+
+Consulta ao painel de emendas individuais: realizada para 2015 e RP 6.
+
+Distribuições agregadas examinadas: tipo de autor, região, UF e partido.
+
+Detalhamento por partido e tipo de autor: realizado para o DEM.
+
+Cruzamento com o Portal da Transparência: ainda pendente.
+
+### Próximas etapas
+
+1. Verificar a disponibilidade do número individual da emenda ou do PTRES em consultas adicionais do SIOP.
+2. Investigar a relação entre esses identificadores e os códigos de emenda do Portal da Transparência.
+3. Verificar a possibilidade de obter registros individualizados do painel, além dos resultados agregados.
+4. Documentar a cobertura, as variáveis e as chaves de integração identificadas.
+5. Avaliar quais perguntas de pesquisa podem ser respondidas com as bases efetivamente compatíveis.
+
+### Síntese
+
+O SIOP foi identificado como uma fonte complementar ao Portal da Transparência, com informações sobre classificação orçamentária, execução financeira e distribuição agregada das emendas.
+
+A consulta exploratória de 2015 e a extração dos itens RP 6 foram realizadas. O painel também foi utilizado para examinar valores agregados por tipo de autor, região, unidade da Federação e partido.
+
+O principal ponto ainda pendente é identificar uma chave de ligação confiável entre os itens de despesa do SIOP e as emendas individualizadas no Portal da Transparência.
