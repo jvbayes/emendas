@@ -1,0 +1,139 @@
+PREFIX loa: <http://vocab.e.gov.br/2013/09/loa#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT
+  ?item
+  ?codExercicio ?data
+  ?codEsfera ?descEsfera
+  ?codOrgao ?descOrgao
+  ?codUO ?descUO
+  ?codFuncao ?descFuncao
+  ?codSubfuncao ?descSubfuncao
+  ?codPrograma ?descPrograma
+  ?codAcao ?descAcao
+  ?codSubtitulo ?descSubtitulo
+  ?codPlanoOrcamentario ?descPlanoOrcamentario
+  ?codFonte ?descFonte
+  ?codCategoriaEconomica ?descCategoriaEconomica
+  ?codGND ?descGND
+  ?codModalidadeAplicacao ?descModalidadeAplicacao
+  ?codIdUso ?descIdUso
+  ?codRP ?descRP
+  ?codElementoDespesa ?descElementoDespesa
+  ?ploa ?loa ?lei_mais_credito
+  ?empenhado ?liquidado ?pago
+WHERE {
+  GRAPH <http://orcamento.dados.gov.br/2015/> {
+    ?item a loa:ItemDespesa .
+    ?item loa:temResultadoPrimario ?rp .
+    ?rp loa:codigo ?codRP .
+    FILTER(STR(?codRP) = "6")
+
+    OPTIONAL {
+      ?item loa:temExercicio ?exercicio .
+      OPTIONAL { ?exercicio loa:identificador ?codExercicio . }
+      OPTIONAL { ?exercicio loa:dataUltimaAtualizacao ?data . }
+    }
+
+    OPTIONAL {
+      ?item loa:temEsfera ?esfera .
+      OPTIONAL { ?esfera loa:codigo ?codEsfera . }
+      OPTIONAL { ?esfera rdfs:label ?descEsfera . }
+    }
+
+    OPTIONAL {
+      ?item loa:temUnidadeOrcamentaria ?UO .
+      OPTIONAL { ?UO loa:codigo ?codUO . }
+      OPTIONAL { ?UO rdfs:label ?descUO . }
+      OPTIONAL {
+        ?UO loa:temOrgao ?orgao .
+        OPTIONAL { ?orgao loa:codigo ?codOrgao . }
+        OPTIONAL { ?orgao rdfs:label ?descOrgao . }
+      }
+    }
+
+    OPTIONAL {
+      ?item loa:temFuncao ?funcao .
+      OPTIONAL { ?funcao loa:codigo ?codFuncao . }
+      OPTIONAL { ?funcao rdfs:label ?descFuncao . }
+    }
+
+    OPTIONAL {
+      ?item loa:temSubfuncao ?subfuncao .
+      OPTIONAL { ?subfuncao loa:codigo ?codSubfuncao . }
+      OPTIONAL { ?subfuncao rdfs:label ?descSubfuncao . }
+    }
+
+    OPTIONAL {
+      ?item loa:temPrograma ?programa .
+      OPTIONAL { ?programa loa:codigo ?codPrograma . }
+      OPTIONAL { ?programa rdfs:label ?descPrograma . }
+    }
+
+    OPTIONAL {
+      ?item loa:temAcao ?acao .
+      OPTIONAL { ?acao loa:codigo ?codAcao . }
+      OPTIONAL { ?acao rdfs:label ?descAcao . }
+    }
+
+    OPTIONAL {
+      ?item loa:temSubtitulo ?subtitulo .
+      OPTIONAL { ?subtitulo loa:codigo ?codSubtitulo . }
+      OPTIONAL { ?subtitulo rdfs:label ?descSubtitulo . }
+    }
+
+    OPTIONAL {
+      ?item loa:temPlanoOrcamentario ?po .
+      OPTIONAL { ?po loa:codigo ?codPlanoOrcamentario . }
+      OPTIONAL { ?po rdfs:label ?descPlanoOrcamentario . }
+    }
+
+    OPTIONAL {
+      ?item loa:temFonteRecursos ?fonte .
+      OPTIONAL { ?fonte loa:codigo ?codFonte . }
+      OPTIONAL { ?fonte rdfs:label ?descFonte . }
+    }
+
+    OPTIONAL {
+      ?item loa:temCategoriaEconomica ?categoria .
+      OPTIONAL { ?categoria loa:codigo ?codCategoriaEconomica . }
+      OPTIONAL { ?categoria rdfs:label ?descCategoriaEconomica . }
+    }
+
+    OPTIONAL {
+      ?item loa:temGND ?gnd .
+      OPTIONAL { ?gnd loa:codigo ?codGND . }
+      OPTIONAL { ?gnd rdfs:label ?descGND . }
+    }
+
+    OPTIONAL {
+      ?item loa:temModalidadeAplicacao ?modalidade .
+      OPTIONAL { ?modalidade loa:codigo ?codModalidadeAplicacao . }
+      OPTIONAL { ?modalidade rdfs:label ?descModalidadeAplicacao . }
+    }
+
+    OPTIONAL {
+      ?item loa:temIdentificadorUso ?uso .
+      OPTIONAL { ?uso loa:codigo ?codIdUso . }
+      OPTIONAL { ?uso rdfs:label ?descIdUso . }
+    }
+
+    OPTIONAL {
+      ?rp rdfs:label ?descRP .
+    }
+
+    OPTIONAL {
+      ?item loa:temElementoDespesa ?elemento .
+      OPTIONAL { ?elemento loa:codigo ?codElementoDespesa . }
+      OPTIONAL { ?elemento rdfs:label ?descElementoDespesa . }
+    }
+
+    OPTIONAL { ?item loa:valorProjetoLei ?ploa . }
+    OPTIONAL { ?item loa:valorDotacaoInicial ?loa . }
+    OPTIONAL { ?item loa:valorLeiMaisCredito ?lei_mais_credito . }
+    OPTIONAL { ?item loa:valorEmpenhado ?empenhado . }
+    OPTIONAL { ?item loa:valorLiquidado ?liquidado . }
+    OPTIONAL { ?item loa:valorPago ?pago . }
+  }
+}
+ORDER BY ?item
